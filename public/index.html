@@ -42,5 +42,20 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!--Este script nos sirve para realizar la instalacion del service worker, solo se puede
+      intalar si estoy en el build de produccion-->
+    <script>
+      //console.log('%NODE_ENV%');
+      const isProduction  = ('%NODE_ENV%' === 'production');
+      
+      /*si estoy en producion y si la tecnologia del serviceWorker existe en el navigation, podemos
+        registrar nuestro service worker. tener en cuenta que no todos los navegadores lo soportan*/
+      if (isProduction && 'serviceWorker' in navigator) {
+        navigator.serviceWorker.register( 'sw.js' );
+      }else{
+        console.log('No is production: ', '%NODE_ENV%', isProduction);
+      }
+
+    </script>
   </body>
 </html>
